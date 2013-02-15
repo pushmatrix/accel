@@ -1,0 +1,17 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <script type="text/javascript">
+  window.ondevicemotion = function(event) {
+      var accelerationX = event.accelerationIncludingGravity.x;
+      var accelerationY = event.accelerationIncludingGravity.y;
+      var accelerationZ = event.accelerationIncludingGravity.z;
+      str = accelerationX + ", " + accelerationY + ", " + accelerationZ
+      document.getElementById('stuff').innerHTML = str;
+  }
+  </script>
+  <div id="stuff"></div>
+</body>
+</html>
