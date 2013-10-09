@@ -9,18 +9,13 @@
     var messagesRef = new Firebase('https://calls.firebaseio.com/');
   
     window.ondevicemotion = function(event) {
-        messagesRef.set('accel', {
+        messagesRef.set({'accel': {
           accelX: event.accelerationIncludingGravity.x,
           accelY: event.accelerationIncludingGravity.y,
           accelZ: event.accelerationIncludingGravity.z
-        });
+        }});
     }
 
-    messagesRef.set({'accel': {
-          accelX: 5,
-          accelY: 5,
-          accelZ: 5
-        }});
     // Add a callback that is triggered for each chat message.
     messagesRef.limit(10).on('child_added', function (snapshot) {
       var message = snapshot.val();
