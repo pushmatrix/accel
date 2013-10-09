@@ -1,17 +1,35 @@
 <html>
 <head>
   <title></title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+  <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+
+  <script type="text/javascript">
+    // Get a reference to the root of the chat data.
+    var messagesRef = new Firebase('https://calls.firebaseio.com/');
+  
+    window.ondevicemotion = function(event) {
+        messagesRef.set('accel', {
+          accelX: event.accelerationIncludingGravity.x,
+          accelY: event.accelerationIncludingGravity.y,
+          accelZ: event.accelerationIncludingGravity.z
+        });
+    }
+
+    messagesRef.set({'accel': {
+          accelX: 5,
+          accelY: 5,
+          accelZ: 5
+        }});
+    // Add a callback that is triggered for each chat message.
+    messagesRef.limit(10).on('child_added', function (snapshot) {
+      var message = snapshot.val();
+      str = message.accelX + ", " + message.accelY + ", " + message.accelZ
+      document.getElementById('stuff').innerHTML = str;
+    });
+  </script>
 </head>
 <body>
-  <script type="text/javascript">
-  window.ondevicemotion = function(event) {
-      var accelerationX = event.accelerationIncludingGravity.x;
-      var accelerationY = event.accelerationIncludingGravity.y;
-      var accelerationZ = event.accelerationIncludingGravity.z;
-      str = accelerationX + ", " + accelerationY + ", " + accelerationZ
-      document.getElementById('stuff').innerHTML = str;
-  }
-  </script>
   <div id="stuff"></div>
 </body>
 </html>
