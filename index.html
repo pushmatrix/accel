@@ -17,8 +17,8 @@
     }
 
     // Add a callback that is triggered for each chat message.
-    messagesRef.limit(10).on('child_added', function (snapshot) {
-      var message = snapshot.val();
+    messagesRef.limit(10).on('value', function (snapshot) {
+      var message = snapshot.val().accel;
       str = message.accelX + ", " + message.accelY + ", " + message.accelZ
       document.getElementById('stuff').innerHTML = str;
     });
